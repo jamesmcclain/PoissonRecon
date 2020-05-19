@@ -31,7 +31,7 @@ typedef struct {
 
 typedef my_destination_mgr * my_dest_ptr;
 
-#if 1
+#if 0
 #define OUTPUT_BUF_SIZE  4096	/* choose an efficiently fwrite'able size */
 #else
 // Misha modified for bigger block I/O
@@ -111,7 +111,7 @@ METHODDEF(void)
 term_destination (j_compress_ptr cinfo)
 {
   my_dest_ptr dest = (my_dest_ptr) cinfo->dest;
-  size_t datacount = OUTPUT_BUF_SIZE - dest->pub.free_in_buffer;
+  size_t datacount = ((OUTPUT_BUF_SIZE) - (dest->pub.free_in_buffer));
 
   /* Write any data remaining in the buffer */
   if (datacount > 0) {
