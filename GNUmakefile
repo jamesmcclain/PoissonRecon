@@ -1,6 +1,6 @@
 CC = gcc
 CXX ?= g++
-CFLAGS ?= -O0 -ggdb3
+CFLAGS ?= -Os
 
 all: PoissonRecon
 
@@ -9,6 +9,7 @@ all: PoissonRecon
 
 PoissonRecon: Src/PoissonRecon.o
 	$(CXX) -o $@ $< -lpthread
+	strip $@
 
 clean:
 	rm -f PoissonRecon
