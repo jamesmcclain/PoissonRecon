@@ -366,7 +366,9 @@ struct ThreadPool
 #ifdef _OPENMP
 		OPEN_MP ,
 #endif // _OPENMP
+#if defined(_THREAD_POOL)
 		THREAD_POOL ,
+#endif
 		ASYNC ,
 		NONE
 	};
@@ -445,6 +447,7 @@ struct ThreadPool
 			_ThreadFunction( 0 );
 			for( unsigned int t=1 ; t<threads ; t++ ) futures[t-1].get();
 		}
+#if defined(_THREAD_POOL)
 		else if( _ParallelType==THREAD_POOL )
 		{
 			unsigned int targetTasks = 0;
@@ -462,6 +465,7 @@ struct ThreadPool
 				}
 			}
 		}
+#endif
 	}
 
 	static unsigned int NumThreads( void ){ return (unsigned int)_Threads.size()+1; }
@@ -478,12 +482,14 @@ struct ThreadPool
 		_Close = true;
 		numThreads--;
 		_Threads.resize( numThreads );
+#if defined(_THREAD_POOL)
 		if( _ParallelType==THREAD_POOL )
 		{
 			_RemainingTasks = 0;
 			_Close = false;
 			for( unsigned int t=0 ; t<numThreads ; t++ ) _Threads[t] = std::thread( _ThreadInitFunction , t );
 		}
+#endif
 	}
 	static void Terminate( void )
 	{
@@ -551,7 +557,9 @@ const std::vector< std::string >ThreadPool::ParallelNames =
 #ifdef _OPENMP
 	"open mp" ,
 #endif // _OPENMP
+#if defined(_THREAD_POOL)
 	"thread pool" ,
+#endif
 	"async" ,
 	"none"
 };
