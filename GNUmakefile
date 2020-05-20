@@ -8,7 +8,7 @@ all: PoissonRecon
 	$(CXX) -I. $(CFLAGS) -DFAST_COMPILE=1 -Wno-error=misleading-indentation $< -c -o $@
 
 PoissonRecon: Src/PoissonRecon.o
-	$(CXX) -o $@ $< -lpthread
+	$(CXX) -static -o $@ $< -lpthread
 	strip $@
 
 clean:
