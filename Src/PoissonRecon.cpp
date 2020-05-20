@@ -47,7 +47,9 @@ DAMAGE.
 #include "FEMTree.h"
 #include "Ply.h"
 #include "PointStreamData.h"
+#if 0
 #include "Image.h"
+#endif
 
 MessageWriter messageWriter;
 
@@ -365,6 +367,7 @@ void ExtractMesh( UIntPack< FEMSigs ... > , std::tuple< SampleData ... > , FEMTr
 	delete mesh;
 }
 
+#if 0
 template< typename Real , unsigned int Dim >
 void WriteGrid( ConstPointer( Real ) values , int res , const char *fileName )
 {
@@ -422,6 +425,7 @@ void WriteGrid( ConstPointer( Real ) values , int res , const char *fileName )
 	}
 	delete[] ext;
 }
+#endif
 
 
 template< class Real , typename ... SampleData , unsigned int ... FEMSigs >
@@ -695,6 +699,7 @@ void Execute( int argc , char* argv[] , UIntPack< FEMSigs ... > )
 		fclose( fp );
 	}
 
+#if 0
 	if( Grid.set )
 	{
 		int res = 0;
@@ -717,6 +722,7 @@ void Execute( int argc , char* argv[] , UIntPack< FEMSigs ... > )
 			}
 		}
 	}
+#endif
 
 	if( Out.set )
 	{
